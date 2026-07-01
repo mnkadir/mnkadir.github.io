@@ -1,43 +1,53 @@
-# Md Nurul Kadir — Personal Portfolio
+# Md Nurul Kadir — Multi-page Portfolio
 
-A responsive, research-focused portfolio designed for GitHub Pages. It is a dependency-free static site: no build command, package manager, or framework is required.
+A dependency-free static portfolio for GitHub Pages.
+
+## Pages
+
+- `index.html` — Home
+- `about.html` — Biography, education, experience, awards, certifications, languages, and memberships
+- `research.html` — Research themes and projects
+- `publications.html` — All 22 publicly indexed outputs
+- `teaching.html` — Teaching approach and lecture videos
+- `contact.html` — Contact information and professional profiles
 
 ## Preview locally
 
-Open `index.html` directly, or run a small local server from this folder:
+Open `index.html` or run a local server inside this folder:
 
 ```powershell
 python -m http.server 8000
 ```
 
-Then visit `http://localhost:8000`.
+Then open `http://localhost:8000`.
 
-## Publish with GitHub Pages
+## Update the existing GitHub website
 
-1. Create a new GitHub repository, such as `portfolio`.
-2. Upload every file in this folder to the repository root.
-3. In the repository, open **Settings → Pages**.
-4. Under **Build and deployment**, choose **Deploy from a branch**.
-5. Select the `main` branch and `/ (root)`, then save.
+Your GitHub repository should be named `mnkadir.github.io` for the address `https://mnkadir.github.io`.
 
-GitHub will provide the public URL after deployment. For a profile site at `https://YOUR-USERNAME.github.io`, name the repository `YOUR-USERNAME.github.io`.
+### Easiest method: GitHub website
 
-## Before publishing
+1. Open `https://github.com/mnkadir/mnkadir.github.io`.
+2. Select **Add file → Upload files**.
+3. On your computer, open the `personal portfolio` folder.
+4. Select **everything inside the folder**—all HTML files, `styles.css`, `script.js`, `.nojekyll`, and the complete `assets` folder.
+5. Drag the selected items into GitHub’s upload area.
+6. Existing files with the same names will be replaced; new pages and the profile image will be added.
+7. Enter the commit message: `Replace portfolio with multi-page website`.
+8. Select **Commit changes**.
+9. Open **Settings → Pages** and confirm the source is `main` and `/ (root)`.
+10. Wait one to five minutes, then reload `https://mnkadir.github.io` using `Ctrl+F5`.
 
-- Replace the default `og:image` path with an absolute URL after the site has a domain, for more reliable social previews.
-- Review dates and role descriptions in `index.html` as appointments change.
-- Add a CV PDF to `assets/` and link it from the hero if desired.
-- Confirm that `mnkseum@gmail.com` is the preferred public contact address.
+Important: upload the contents of `personal portfolio`, not the enclosing folder. `index.html` must sit at the repository root.
 
-## Public information sources
+### Future text updates
 
-Content was curated from publicly indexed professional and academic pages:
+For a small edit, open the relevant `.html` file on GitHub, click the pencil icon, edit the text, and commit. The site redeploys automatically.
 
-- [LinkedIn](https://www.linkedin.com/in/md-nurul-kadir)
-- [ResearchGate](https://www.researchgate.net/profile/Md-Nurul-Kadir)
-- [Academia.edu](https://sau-bd.academia.edu/MdNurulKadirSeum)
-- [MACH Coastal Hub](https://coastalhub.org/mach-focus-areas/coastal-climate-risk/effect-of-bathymetric-changes-on-water-level-variation-in-estuaries/)
-- [UF Watershed Ecology Lab](https://www.watershedecology.org/research.html)
-- [UF Water Institute 2026 abstract compilation](https://conference.ifas.ufl.edu/waterinstitute/documents/WaterInstitute2026-Abstract-Compilation.pdf)
+### Updating the profile image
 
-Verify all biographical details before publication. Public profiles occasionally contain stale or conflicting dates.
+Replace `assets/md-nurul-kadir.jpg` with a new image using the exact same filename, then commit it. A square image of at least 800×800 pixels is recommended.
+
+## Source record
+
+See [SOURCES.md](SOURCES.md) for the public profiles used and the editorial note about conflicting date ranges.

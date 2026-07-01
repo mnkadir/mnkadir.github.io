@@ -1,43 +1,6 @@
-const menuButton = document.querySelector('.menu-toggle');
-const nav = document.querySelector('.primary-nav');
-const progress = document.querySelector('.scroll-progress');
-const glow = document.querySelector('.ambient-glow');
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-menuButton.addEventListener('click', () => {
-  const open = menuButton.getAttribute('aria-expanded') === 'true';
-  menuButton.setAttribute('aria-expanded', String(!open));
-  nav.classList.toggle('is-open', !open);
-});
-
-nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-  menuButton.setAttribute('aria-expanded', 'false');
-  nav.classList.remove('is-open');
-}));
-
-const revealObserver = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('is-visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px' });
-
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-function updateProgress() {
-  const max = document.documentElement.scrollHeight - window.innerHeight;
-  progress.style.width = `${max > 0 ? (window.scrollY / max) * 100 : 0}%`;
-}
-window.addEventListener('scroll', updateProgress, { passive: true });
-updateProgress();
-
-if (!reducedMotion) {
-  window.addEventListener('pointermove', event => {
-    glow.style.left = `${event.clientX}px`;
-    glow.style.top = `${event.clientY}px`;
-  }, { passive: true });
-}
-
-document.getElementById('year').textContent = new Date().getFullYear();
+const menu=document.querySelector('.menu'),nav=document.querySelector('#nav');
+if(menu&&nav){menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')==='true';menu.setAttribute('aria-expanded',String(!open));nav.classList.toggle('open',!open)});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.setAttribute('aria-expanded','false');nav.classList.remove('open')}))}
+const page=document.body.dataset.page;document.querySelector(`[data-nav="${page}"]`)?.classList.add('active');
+document.querySelectorAll('[data-year]').forEach(el=>el.textContent=new Date().getFullYear());
+const io=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');io.unobserve(entry.target)}}),{threshold:.08});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const progress=document.querySelector('.progress');function setProgress(){const max=document.documentElement.scrollHeight-innerHeight;progress.style.width=`${max>0?scrollY/max*100:0}%`}addEventListener('scroll',setProgress,{passive:true});setProgress();
