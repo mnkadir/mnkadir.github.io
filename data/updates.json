@@ -1,5 +1,16 @@
 [
   {
+    "id": "2026-11-10-form-test-please-ignore",
+    "type": "video",
+    "title": "Form test: please ignore",
+    "date": "2026-11-10",
+    "place": "",
+    "summary": "Temporary test of the website update form.",
+    "link": "https://www.youtube.com/watch?v=LSIiaVsMoII",
+    "images": [],
+    "source_issue": 1
+  },
+  {
     "id": "2026-08-28-delaware-estuary-preprint",
     "type": "news",
     "title": "New preprint: A Century of Tidal Transformation in the Delaware Estuary",
