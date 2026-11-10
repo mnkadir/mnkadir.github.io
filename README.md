@@ -1,53 +1,67 @@
-# Md Nurul Kadir — Multi-page Portfolio
+# Md Nurul Kadir — Portfolio website
 
-A dependency-free static portfolio for GitHub Pages.
+The website at **https://mnkadir.github.io**. It is a plain static site hosted by GitHub Pages: no build tools, nothing to install.
 
-## Pages
+## How to update the website (no coding)
 
-- `index.html` — Home
-- `about.html` — Biography, education, experience, awards, certifications, languages, and memberships
-- `research.html` — Research themes and projects
-- `publications.html` — All 22 publicly indexed outputs
-- `teaching.html` — Teaching approach and lecture videos
-- `contact.html` — Contact information and professional profiles
+### Add a conference, seminar, certificate, interview, award or news item
 
-## Preview locally
+1. Open the form: **https://github.com/mnkadir/mnkadir.github.io/issues/new?template=add-update.yml**
+   (or go to the repository → **Issues** → **New issue** → **Add a website update**).
+2. Choose the type, write a title and a date.
+3. Optional: add the event or place, a short description and a link. A YouTube link plays directly on the site.
+4. Optional: click in the **Photos or certificate** box and drag in your photos (JPG or PNG) or a PDF certificate. Wait for each upload to finish. The first photo becomes the cover.
+5. Press **Create**.
 
-Open `index.html` or run a local server inside this folder:
+About two minutes later the item is on the **Highlights** page and in **Recent news** on the home page. The form replies with the link and closes itself. If something is wrong (for example a date it cannot read), the reply tells you what to fix.
 
-```powershell
+This works from a phone too. Bookmark the form link.
+
+### Add a publication
+
+Open **https://github.com/mnkadir/mnkadir.github.io/issues/new?template=add-publication.yml**, fill in the title, year, type and (ideally) the DOI link, and press **Create**. It is added to the Publications page, the publication count, and Recent news.
+
+### Change or remove an item
+
+Everything the forms add is stored in two small list files:
+
+- `data/updates.json` — highlights and news
+- `data/publications.json` — publications
+
+Open the file on GitHub, click the pencil icon, change the text or delete the whole block for that item (from its `{` to its `}`, including the comma that separates it from its neighbour), and commit. Photos live in `assets/updates/`.
+
+### Change other text
+
+Open the relevant `.html` file on GitHub, click the pencil icon, edit the text and commit.
+
+| Page | File |
+| --- | --- |
+| Home | `index.html` |
+| About | `about.html` |
+| Research | `research.html` |
+| Publications | `publications.html` (list comes from `data/publications.json`) |
+| Highlights | `highlights.html` (items come from `data/updates.json`) |
+| Teaching | `teaching.html` |
+| Contact | `contact.html` |
+
+To change the profile photo, replace `assets/md-nurul-kadir.jpg` with a new square image using the same file name.
+
+## How the forms work
+
+- `.github/ISSUE_TEMPLATE/` holds the two forms.
+- `.github/workflows/site-content.yml` runs when a form is submitted. It only acts on forms submitted by the repository owner, so other people cannot change the site.
+- `.github/scripts/add_content.py` reads the form, shrinks photos to web size, removes hidden photo data such as GPS location, and updates the list files.
+
+## Preview on your own computer
+
+The pages load their lists from the `data` folder, so open the site through a small local server rather than by double-clicking a file. For example, with Python installed:
+
+```
 python -m http.server 8000
 ```
 
 Then open `http://localhost:8000`.
 
-## Update the existing GitHub website
+## Sources
 
-Your GitHub repository should be named `mnkadir.github.io` for the address `https://mnkadir.github.io`.
-
-### Easiest method: GitHub website
-
-1. Open `https://github.com/mnkadir/mnkadir.github.io`.
-2. Select **Add file → Upload files**.
-3. On your computer, open the `personal portfolio` folder.
-4. Select **everything inside the folder**—all HTML files, `styles.css`, `script.js`, `.nojekyll`, and the complete `assets` folder.
-5. Drag the selected items into GitHub’s upload area.
-6. Existing files with the same names will be replaced; new pages and the profile image will be added.
-7. Enter the commit message: `Replace portfolio with multi-page website`.
-8. Select **Commit changes**.
-9. Open **Settings → Pages** and confirm the source is `main` and `/ (root)`.
-10. Wait one to five minutes, then reload `https://mnkadir.github.io` using `Ctrl+F5`.
-
-Important: upload the contents of `personal portfolio`, not the enclosing folder. `index.html` must sit at the repository root.
-
-### Future text updates
-
-For a small edit, open the relevant `.html` file on GitHub, click the pencil icon, edit the text, and commit. The site redeploys automatically.
-
-### Updating the profile image
-
-Replace `assets/md-nurul-kadir.jpg` with a new image using the exact same filename, then commit it. A square image of at least 800×800 pixels is recommended.
-
-## Source record
-
-See [SOURCES.md](SOURCES.md) for the public profiles used and the editorial note about conflicting date ranges.
+See [SOURCES.md](SOURCES.md) for the public profiles the content was compiled from.

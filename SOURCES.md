@@ -11,7 +11,7 @@ Portfolio content was reconciled on July 1, 2026 from:
 - [ResearchGate](https://www.researchgate.net/profile/Md-Nurul-Kadir)
 - [ORCID](https://orcid.org/0000-0003-3397-5763)
 - [Google Scholar](https://scholar.google.com/citations?user=dc0bK9sAAAAJ)
-- [MACH Coastal Hub project](https://coastalhub.org/mach-focus-areas/coastal-climate-risk/effect-of-bathymetric-changes-on-water-level-variation-in-estuaries/)
+- [MACH Coastal Hub project](https://coastalhub.org/mach-focus-areas/coastal-climate-risk/riverbed-delaware-estuary/)
 - [UF Watershed Ecology Lab](https://www.watershedecology.org/research.html)
 
 ## Editorial note

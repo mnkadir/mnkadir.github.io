@@ -1,0 +1,78 @@
+name: Add website content from a form
+
+# Runs when the "Add a website update" or "Add a publication" form is submitted.
+# Only forms submitted by the repository owner are processed.
+
+on:
+  issues:
+    types: [opened, reopened]
+
+permissions:
+  contents: write
+  issues: write
+  pages: write
+
+concurrency:
+  group: site-content
+  cancel-in-progress: false
+
+jobs:
+  add-content:
+    if: >-
+      github.event.issue.user.login == github.repository_owner &&
+      (contains(github.event.issue.labels.*.name, 'site-update') ||
+       contains(github.event.issue.labels.*.name, 'site-publication'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ISSUE_NUMBER: ${{ github.event.issue.number }}
+      RESULT_FILE: /tmp/site-content-result.md
+      COMMIT_MSG_FILE: /tmp/site-content-commit.txt
+    steps:
+      - name: Check out the website
+        uses: actions/checkout@v4
+
+      - name: Make sure the photo tool is available
+        run: |
+          if ! command -v magick >/dev/null && ! command -v convert >/dev/null; then
+            sudo apt-get update -qq && sudo apt-get install -y -qq imagemagick
+          fi
+
+      - name: Read the form and update the content files
+        id: content
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          FORM_KIND: ${{ contains(github.event.issue.labels.*.name, 'site-publication') && 'publication' || 'update' }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 .github/scripts/add_content.py
+
+      - name: Save the change to the website
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data assets/updates
+          if git diff --cached --quiet; then
+            echo "Nothing to save."
+            exit 0
+          fi
+          git commit -q -F "$COMMIT_MSG_FILE"
+          git pull -q --rebase origin "${GITHUB_REF_NAME}"
+          git push -q origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Ask GitHub Pages to rebuild the site
+        continue-on-error: true
+        run: gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds" --silent
+
+      - name: Reply on the form and close it
+        run: |
+          gh issue comment "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --body-file "$RESULT_FILE"
+          gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY"
+
+      - name: Explain what went wrong
+        if: failure()
+        run: |
+          if [ ! -s "$RESULT_FILE" ]; then
+            echo "Sorry, something went wrong while adding this to the website, and nothing was changed. The details are in the Actions tab of this repository." > "$RESULT_FILE"
+          fi
+          gh issue comment "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --body-file "$RESULT_FILE"

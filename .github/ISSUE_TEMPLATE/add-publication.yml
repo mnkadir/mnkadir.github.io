@@ -1,0 +1,49 @@
+name: Add a publication
+description: Add a paper, preprint, poster or presentation to the Publications page.
+title: "[Publication] "
+labels: ["site-publication"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fill in this form and press **Create** (or **Submit new issue**) at the bottom.
+        The Publications page updates itself in about two minutes, and a short news item is added to the home page.
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      description: The full title of the publication.
+    validations:
+      required: true
+  - type: input
+    id: year
+    attributes:
+      label: Year
+      placeholder: "2026"
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      options:
+        - Article
+        - Preprint
+        - Conference paper
+        - Poster
+        - Presentation
+        - Data
+    validations:
+      required: true
+  - type: input
+    id: venue
+    attributes:
+      label: Journal or venue
+      description: Optional. The journal, conference or archive name.
+      placeholder: "Journal of Geophysical Research: Earth Surface"
+  - type: input
+    id: link
+    attributes:
+      label: Link
+      description: Optional but recommended. The DOI link is best.
+      placeholder: "https://doi.org/10.xxxx/xxxxx"

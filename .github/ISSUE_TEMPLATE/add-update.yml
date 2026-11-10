@@ -1,0 +1,62 @@
+name: Add a website update
+description: Add a conference, seminar talk, certificate, interview, award or news item to the website.
+title: "[Update] "
+labels: ["site-update"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fill in this form and press **Create** (or **Submit new issue**) at the bottom.
+        The website updates itself in about two minutes. You do not need to edit any code.
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      description: What kind of update is this?
+      options:
+        - Conference presentation
+        - Seminar or talk
+        - Training or certificate
+        - Media or interview
+        - Award or recognition
+        - News
+    validations:
+      required: true
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      description: A short headline, shown in bold on the website.
+      placeholder: "Oral presentation at the AGU Fall Meeting 2026"
+    validations:
+      required: true
+  - type: input
+    id: date
+    attributes:
+      label: Date
+      description: "Write it as year-month-day. Month only (2026-12) or year only (2026) also works."
+      placeholder: "2026-12-14"
+    validations:
+      required: true
+  - type: input
+    id: place
+    attributes:
+      label: Event or place
+      description: Optional. The event name, organisation or city.
+      placeholder: "AGU Fall Meeting, New Orleans, USA"
+  - type: textarea
+    id: summary
+    attributes:
+      label: Short description
+      description: Optional. One to three sentences.
+  - type: input
+    id: link
+    attributes:
+      label: Link
+      description: Optional. A web link such as a YouTube video, news article, event page or paper. YouTube links play directly on the website.
+      placeholder: "https://www.youtube.com/watch?v=..."
+  - type: textarea
+    id: photos
+    attributes:
+      label: Photos or certificate
+      description: Optional. Click inside this box, then drag and drop your photos (JPG or PNG) or a PDF certificate. Wait until each upload finishes before you submit. The first photo is the cover.

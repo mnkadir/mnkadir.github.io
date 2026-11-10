@@ -1,0 +1,44 @@
+[
+  {
+    "id": "2026-08-28-delaware-estuary-preprint",
+    "type": "news",
+    "title": "New preprint: A Century of Tidal Transformation in the Delaware Estuary",
+    "date": "2026-08-28",
+    "place": "ESS Open Archive",
+    "summary": "Preprint with Jorge Lorenzo-Trueba, Taznin Naher, Stefan A. Talke, Thomas Wahl and Sönke Dangendorf on anthropogenic modification, nonlinear harmonic response and flood-relevant high-water duration.",
+    "link": "https://doi.org/10.22541/essoar.15008019/v1",
+    "images": []
+  },
+  {
+    "id": "2026-water-institute-symposium",
+    "type": "conference",
+    "title": "Old Brahmaputra adaptive decision tool in the UF Water Institute Symposium abstracts",
+    "date": "2026",
+    "place": "UF Water Institute Symposium, Gainesville, Florida",
+    "summary": "A stakeholder-informed framework for water management and river connectivity in a data-limited deltaic river.",
+    "link": "https://conference.ifas.ufl.edu/waterinstitute/documents/WaterInstitute2026-Abstract-Compilation.pdf",
+    "link_label": "Abstract compilation (PDF)",
+    "images": []
+  },
+  {
+    "id": "2025-citi-rcr-certification",
+    "type": "certificate",
+    "title": "Physical & Natural Sciences Responsible Conduct of Research",
+    "date": "2025",
+    "place": "CITI Program",
+    "summary": "",
+    "link": "",
+    "images": []
+  },
+  {
+    "id": "2024-csdms-poster",
+    "type": "conference",
+    "title": "Poster at the CSDMS 2024 meeting",
+    "date": "2024",
+    "place": "Community Surface Dynamics Modeling System (CSDMS)",
+    "summary": "",
+    "link": "https://sites.google.com/view/md-nurul-kadir/project-page/csdms-poster-2024",
+    "link_label": "Poster materials",
+    "images": []
+  }
+]
