@@ -13,6 +13,11 @@ The website at **https://mnkadir.github.io**. It is a plain static site hosted b
 4. Optional: click in the **Photos or certificate** box and drag in your photos (JPG or PNG) or a PDF certificate. Wait for each upload to finish. The first photo becomes the cover.
 5. Press **Create**.
 
+Two types also appear on the home page:
+
+- **Research figure**: attach the figure image and paste the paper link. It shows in **Featured figures** on the home page.
+- **Any item with a YouTube link** (a talk, interview or lecture): it shows and plays in the **Video archive** on the home page.
+
 About two minutes later the item is on the **Highlights** page and in **Recent news** on the home page. The form replies with the link and closes itself. If something is wrong (for example a date it cannot read), the reply tells you what to fix.
 
 This works from a phone too. Bookmark the form link.

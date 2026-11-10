@@ -16,6 +16,8 @@ body:
       options:
         - Conference presentation
         - Seminar or talk
+        - Research figure (shown on the home page)
+        - Video (talk, lecture or recording)
         - Training or certificate
         - Media or interview
         - Award or recognition
@@ -53,10 +55,10 @@ body:
     id: link
     attributes:
       label: Link
-      description: Optional. A web link such as a YouTube video, news article, event page or paper. YouTube links play directly on the website.
+      description: Optional. A web link such as a YouTube video, news article, event page or paper. Any item with a YouTube link also appears in the Video archive on the home page and plays there. For a research figure, paste the link to the paper.
       placeholder: "https://www.youtube.com/watch?v=..."
   - type: textarea
     id: photos
     attributes:
       label: Photos or certificate
-      description: Optional. Click inside this box, then drag and drop your photos (JPG or PNG) or a PDF certificate. Wait until each upload finishes before you submit. The first photo is the cover.
+      description: Optional. Click inside this box, then drag and drop your photos or figure image (JPG or PNG) or a PDF certificate. Wait until each upload finishes before you submit. The first photo is the cover.

@@ -40,5 +40,25 @@
     "link": "https://sites.google.com/view/md-nurul-kadir/project-page/csdms-poster-2024",
     "link_label": "Poster materials",
     "images": []
+  },
+  {
+    "id": "lecture-6-agricultural-mechanization",
+    "type": "video",
+    "title": "Class Lecture 6: Agricultural Mechanization",
+    "date": "",
+    "place": "AGEN 159 · Farm Implements and Machinery",
+    "summary": "",
+    "link": "https://www.youtube.com/watch?v=LSIiaVsMoII",
+    "images": []
+  },
+  {
+    "id": "lecture-5-agricultural-mechanization",
+    "type": "video",
+    "title": "Class Lecture 5: Agricultural Mechanization",
+    "date": "",
+    "place": "AGEN 159 · Farm Implements and Machinery",
+    "summary": "",
+    "link": "https://www.youtube.com/watch?v=DU7zNG-dhKE",
+    "images": []
   }
 ]

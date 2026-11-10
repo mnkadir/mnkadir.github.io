@@ -39,6 +39,8 @@ const TYPES = {
   seminar: 'Seminar & talk',
   certificate: 'Training & certificate',
   media: 'Media & interview',
+  figure: 'Research figure',
+  video: 'Video',
   award: 'Award',
   news: 'News'
 };
@@ -126,16 +128,17 @@ function openLightbox(images, title, start = 0) {
 }
 
 // ---------- Highlights ----------
-function updateCard(item) {
+function updateCard(item, options = {}) {
   const images = (item.images || []).map(safeUrl).filter(Boolean);
   const link = safeUrl(item.link);
   const video = youtubeId(link);
   const typeLabel = TYPES[item.type] || 'News';
+  const whole = item.type === 'certificate' || item.type === 'figure'; // show the whole image, never crop it
   let media = null;
 
-  if (images.length) {
+  if (images.length && !(options.preferVideo && video)) {
     media = el('button', {
-      class: `update-media${item.type === 'certificate' ? ' contain' : ''}`, type: 'button',
+      class: `update-media${whole ? ' contain' : ''}`, type: 'button',
       'aria-label': `View ${images.length > 1 ? images.length + ' photos' : 'photo'}: ${item.title}`
     },
       el('img', { src: images[0], alt: item.title, loading: 'lazy' }),
@@ -163,7 +166,7 @@ function updateCard(item) {
     if (url) links.push(el('a', { href: url, target: '_blank', rel: 'noopener', text: `${file.label || 'Open file'} ↗` }));
   });
 
-  return el('article', { class: 'update-card', id: item.id, 'data-type': item.type },
+  return el('article', { class: 'update-card', id: options.noId ? null : item.id, 'data-type': item.type },
     media,
     el('div', { class: 'update-body' },
       el('div', { class: 'update-meta' },
@@ -210,7 +213,7 @@ function renderNews(root, items) {
     root.replaceChildren(el('p', { class: 'empty-note', text: 'News will appear here soon.' }));
     return;
   }
-  root.replaceChildren(...items.slice(0, limit).map(item => {
+  root.replaceChildren(...items.filter(item => item.date).slice(0, limit).map(item => {
     const image = safeUrl((item.images || [])[0]);
     return el('a', { class: 'news-item', href: `highlights.html#${encodeURIComponent(item.id)}` },
       el('time', { datetime: item.date, text: formatDate(item.date) }),
@@ -219,6 +222,16 @@ function renderNews(root, items) {
         el('h3', { text: item.title })),
       image ? el('img', { src: image, alt: '', loading: 'lazy' }) : null);
   }));
+}
+
+// ---------- Featured figures and video archive (home page) ----------
+// Each section stays hidden until there is at least one item to show.
+function renderStrip(root, items, options) {
+  const section = root.closest('section');
+  const limit = Number(root.dataset.limit) || 6;
+  if (!items.length) { if (section) section.hidden = true; return; }
+  root.replaceChildren(...items.slice(0, limit).map(item => updateCard(item, { ...options, noId: true })));
+  if (section) section.hidden = false;
 }
 
 // ---------- Publications ----------
@@ -255,11 +268,15 @@ function renderPublications(root, items) {
 // ---------- Load content ----------
 const highlights = document.querySelector('[data-highlights]');
 const news = document.querySelector('[data-news]');
-if (highlights || news) {
+const figures = document.querySelector('[data-figures]');
+const videos = document.querySelector('[data-videos]');
+if (highlights || news || figures || videos) {
   loadJson('data/updates.json').then(items => {
     const list = (Array.isArray(items) ? items : []).filter(item => item && item.title).sort(byNewest);
     if (highlights) renderHighlights(highlights, list);
     if (news) renderNews(news, list);
+    if (figures) renderStrip(figures, list.filter(item => item.type === 'figure'), {});
+    if (videos) renderStrip(videos, list.filter(item => youtubeId(item.link)), { preferVideo: true });
   }).catch(() => {
     const note = el('p', { class: 'empty-note', text: 'Updates could not be loaded. Please refresh the page.' });
     (highlights?.querySelector('[data-grid]') || news).replaceChildren(note);

@@ -44,6 +44,8 @@ MAX_BYTES = 25 * 1024 * 1024
 UPDATE_TYPES = {
     "conference presentation": "conference",
     "seminar or talk": "seminar",
+    "research figure (shown on the home page)": "figure",
+    "video (talk, lecture or recording)": "video",
     "training or certificate": "certificate",
     "media or interview": "media",
     "award or recognition": "award",
