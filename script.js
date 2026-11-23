@@ -127,6 +127,14 @@ function openLightbox(images, title, start = 0) {
   lightbox.showModal();
 }
 
+// Any element with data-zoom="image path" opens that image in the photo viewer.
+document.querySelectorAll('[data-zoom]').forEach(node => {
+  node.addEventListener('click', () => {
+    const src = safeUrl(node.dataset.zoom);
+    if (src) openLightbox([src], node.dataset.zoomTitle || '');
+  });
+});
+
 // ---------- Highlights ----------
 function updateCard(item, options = {}) {
   const images = (item.images || []).map(safeUrl).filter(Boolean);

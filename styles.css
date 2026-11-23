@@ -72,3 +72,21 @@
 @media(max-width:1100px){.site-header nav{gap:16px}.update-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:900px){.site-header nav{gap:0}}
 @media(max-width:640px){.update-grid{grid-template-columns:1fr}.news-item{grid-template-columns:1fr auto;gap:8px 16px}.news-item time{grid-column:1/-1}.news-item img{width:84px;height:60px}.pub{grid-template-columns:36px 1fr}.pub .pub-link{grid-column:2}}
+
+/* ---------- Current research: featured figure and poster ---------- */
+.zoomable{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;position:relative;text-align:left}
+.current-figure{margin:0 0 70px}
+.current-figure .zoomable{background:#fff;padding:clamp(10px,2vw,26px);border:1px solid var(--darkline);box-shadow:0 30px 80px rgba(0,0,0,.35);transition:transform .35s,box-shadow .35s}
+.current-figure .zoomable:hover{transform:translateY(-4px);box-shadow:0 40px 90px rgba(0,0,0,.45)}
+.current-figure img{width:100%;height:auto}
+.zoom-hint{position:absolute;right:16px;top:16px;padding:6px 12px;border-radius:100px;background:var(--ink);color:var(--aqua);font:400 9px var(--mono);text-transform:uppercase;letter-spacing:.07em;opacity:0;transition:opacity .25s}
+.current-figure .zoomable:hover .zoom-hint,.current-figure .zoomable:focus-visible .zoom-hint{opacity:1}
+.current-figure figcaption{margin-top:18px;max-width:900px;color:rgba(255,255,255,.55);font-size:14px}
+.current-project{grid-template-columns:1.1fr .9fr;align-items:center}
+.current-project .actions{margin-top:28px}
+.feature-dark .button.ghost{color:var(--white)}
+.poster-thumb{border:1px solid var(--darkline);box-shadow:0 24px 60px rgba(0,0,0,.35);transition:transform .35s}
+.poster-thumb:hover{transform:translateY(-4px) rotate(-.4deg)}
+.poster-thumb img{width:100%;height:auto}
+.poster-label{position:absolute;left:0;right:0;bottom:0;padding:12px 16px;background:linear-gradient(transparent,rgba(7,28,36,.92));color:var(--aqua);font:400 10px var(--mono);text-transform:uppercase;letter-spacing:.08em}
+@media(max-width:900px){.current-project{grid-template-columns:1fr}.current-figure{margin-bottom:50px}.zoom-hint{opacity:1}}
