@@ -128,20 +128,20 @@ function openLightbox(images, title, start = 0) {
 }
 
 // ---------- CV button ----------
-// Put the CV at assets/cv/Md_Nurul_Kadir_CV.pdf and every "Download CV" button uses it.
-// Until that file exists, the buttons open LinkedIn and say so.
+// Every "Download CV" button links to assets/cv/Md_Nurul_Kadir_CV.pdf.
+// To update the CV, upload a new file with exactly that name. If the file is ever
+// missing, the buttons switch to LinkedIn instead of showing a broken link.
 const CV_PATH = 'assets/cv/Md_Nurul_Kadir_CV.pdf';
 const cvButtons = document.querySelectorAll('[data-cv]');
 if (cvButtons.length) {
-  fetch(CV_PATH, { method: 'HEAD', cache: 'no-cache' }).then(r => r.ok).catch(() => false).then(found => {
+  fetch(CV_PATH, { method: 'HEAD', cache: 'no-cache' }).then(r => r.status !== 404).catch(() => true).then(found => {
+    if (found) return;
     cvButtons.forEach(a => {
-      if (found) {
-        a.href = CV_PATH;
-        a.setAttribute('download', 'Md_Nurul_Kadir_CV.pdf');
-        a.removeAttribute('target');
-      } else {
-        a.textContent = 'CV on LinkedIn ↗';
-      }
+      a.href = 'https://www.linkedin.com/in/md-nurul-kadir';
+      a.removeAttribute('download');
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = 'CV on LinkedIn ↗';
     });
   });
 }

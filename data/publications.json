@@ -9,8 +9,9 @@
   },
   {
     "title": "Unveiling Sediment Bypass Dynamics in Fluvial Deltas: Integrating Wet Fraction Analysis and Stratigraphic Modeling under Sea-Level Oscillations",
-    "year": 2025,
-    "type": "Data",
+    "year": 2024,
+    "type": "Presentation",
+    "venue": "AGU Annual Meeting, Washington, D.C. (oral)",
     "url": "https://scholar.google.com/scholar?q=%22Unveiling+Sediment+Bypass+Dynamics+in+Fluvial+Deltas%22",
     "link_label": "Find on Scholar"
   },
@@ -40,9 +41,17 @@
     "title": "Complex Patterns of Sediment Erosion and Deposition under Sea-Level Variations Change: Insights from a Coupled Stratigraphic Experiment and Moving Boundary Modelling Approach for Fluvio-Deltaic Evolution",
     "year": 2024,
     "type": "Preprint",
-    "venue": "ESS Open Archive",
+    "venue": "ESS Open Archive · poster at CSDMS 2024",
     "url": "https://doi.org/10.22541/essoar.171629676.69290430/v1",
     "link_label": "DOI"
+  },
+  {
+    "title": "Quantification and Spatiotemporal Evolution of Tidal Asymmetry in the Sibsa-Pussur Estuary: A Harmonic Analysis Approach",
+    "year": 2024,
+    "type": "Article",
+    "venue": "Technical Journal, River Research Institute, 16(1), 8–15",
+    "url": "https://scholar.google.com/scholar?q=%22Quantification+and+spatiotemporal+evolution+of+tidal+asymmetry+in+the+Sibsa-Pussur+estuary%22",
+    "link_label": "Find on Scholar"
   },
   {
     "title": "A Comprehensive Analysis of Surface Water Changes in Dau Tieng Lake, Vietnam, across Dry and Wet Seasons",
@@ -114,6 +123,7 @@
     "title": "Buriganga River Pollution: Its Causes and Impacts",
     "year": 2015,
     "type": "Conference paper",
+    "venue": "Proc. IICSD-2015, DUET Gazipur, pp. 323–328",
     "url": "https://scholar.google.com/scholar?q=%22Buriganga+River+Pollution%3A+Its+Causes+and+Impacts%22",
     "link_label": "Find on Scholar"
   },
@@ -128,6 +138,7 @@
     "title": "Impacts of Climate Change on Crop Coefficient and Reference Crop Evapotranspiration of Boro Rice in North-East Hydrological Region of Bangladesh",
     "year": 2015,
     "type": "Conference paper",
+    "venue": "Proc. 5th International Conference on Water & Flood Management (ICWFM-2015), BUET",
     "url": "https://scholar.google.com/scholar?q=%22Impacts+of+climate+change+on+crop+coefficient+and+reference+crop+evapotranspiration+of+boro+rice%22",
     "link_label": "Find on Scholar"
   },
@@ -149,6 +160,7 @@
     "title": "Sediment Re-circulation in the Ganges–Brahmaputra–Meghna Delta and Its Implications for Ecosystem Services",
     "year": 2014,
     "type": "Poster",
+    "venue": "Deltas in Times of Climate Change II, Rotterdam",
     "url": "https://scholar.google.com/scholar?q=%22Sediment+re-circulation+in+the+Ganges-Brahmaputra-Meghna+delta+and+its+implications+for+ecosystem+services%22",
     "link_label": "Find on Scholar"
   },

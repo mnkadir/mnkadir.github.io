@@ -21,6 +21,16 @@
     "images": []
   },
   {
+    "id": "2025-climate-communicator-certificate",
+    "type": "certificate",
+    "title": "“Climate Communicator” certificate",
+    "date": "2025-05",
+    "place": "Megalopolitan Coastal Transformation Hub (MACH)",
+    "summary": "For developing science-communication materials for the MACH climate communication art initiative in the Spring 2025 semester.",
+    "link": "",
+    "images": []
+  },
+  {
     "id": "2025-citi-rcr-certification",
     "type": "certificate",
     "title": "Physical & Natural Sciences Responsible Conduct of Research",
@@ -36,20 +46,102 @@
     "title": "Reflections from the next generation of climate researchers",
     "date": "2025",
     "place": "MACH annual Meeting 2025",
-    "summary": "[Md Nurual Kadir,](https://www.linkedin.com/in/md-nurul-kadir/) a dedicated MACH researcher from [University of Florida](https://geology.ufl.edu/), who shares hisr personal journey into climate science and reflects on the impact of his work. As a MACH team member, Kadir’s research aims to understand estuarine bathymetry, or underwater topography, impacts tidally-driven water levels, flood risk, and communities.",
+    "summary": "[Md Nurul Kadir,](https://www.linkedin.com/in/md-nurul-kadir/) a dedicated MACH researcher from the [University of Florida](https://geology.ufl.edu/), shares his personal journey into climate science and reflects on the impact of his work. As a MACH team member, Kadir’s research aims to understand how estuarine bathymetry, or underwater topography, affects tidally driven water levels, flood risk and communities.",
     "link": "https://rutgers.mediaspace.kaltura.com/playlist/dedicated/373324622/1_ljunqggr/1_w2e9xlmu",
+    "link_label": "Watch the interview",
     "images": [],
     "source_issue": 2
   },
   {
+    "id": "2024-12-agu-oral-presentation",
+    "type": "conference",
+    "title": "Oral presentation at the AGU Annual Meeting 2024",
+    "date": "2024-12-09",
+    "place": "American Geophysical Union Annual Meeting, Washington, D.C., 9–13 December 2024",
+    "summary": "“Unveiling Sediment Bypass Dynamics in Fluvial Deltas: Integrating Wet Fraction Analysis and Stratigraphic Modeling under Sea-Level Oscillations”, with Jorge Lorenzo-Trueba, Anjali M. Fernandes and Arvind Singh.",
+    "link": "",
+    "images": []
+  },
+  {
     "id": "2024-csdms-poster",
     "type": "conference",
-    "title": "Poster at the CSDMS 2024 meeting",
-    "date": "2024",
-    "place": "Community Surface Dynamics Modeling System (CSDMS)",
+    "title": "Poster at the CSDMS 2024 Annual Meeting",
+    "date": "2024-05-14",
+    "place": "CSDMS Annual Meeting, Montclair State University, 14–16 May 2024",
+    "summary": "“Complex Patterns of Sediment Erosion and Deposition under Sea-Level Variations Change: Insights from a Coupled Stratigraphic Experiment and Moving Boundary Modeling Approach for Fluvio-Deltaic Evolution”, with Jorge Lorenzo-Trueba, Anjali M. Fernandes and Arvind Singh.",
+    "link": "https://doi.org/10.22541/essoar.171629676.69290430/v1",
+    "link_label": "Read the preprint",
+    "images": []
+  },
+  {
+    "id": "2023-csdms-training",
+    "type": "certificate",
+    "title": "Community Surface Dynamics Modeling System (CSDMS) training",
+    "date": "2023",
+    "place": "Department of Earth and Environmental Studies, Montclair State University",
     "summary": "",
-    "link": "https://sites.google.com/view/md-nurul-kadir/project-page/csdms-poster-2024",
-    "link_label": "Poster materials",
+    "link": "",
+    "images": []
+  },
+  {
+    "id": "2023-04-msu-student-research-symposium",
+    "type": "conference",
+    "title": "Poster at the Montclair State University Student Research Symposium",
+    "date": "2023-04-26",
+    "place": "Montclair State University, Montclair, New Jersey",
+    "summary": "“Quantifying estuarine bathymetric changes under sea-level cycles: Insights from a moving boundary framework”, with Jorge Lorenzo-Trueba.",
+    "link": "https://doi.org/10.22541/essoar.170612216.66589059/v2",
+    "link_label": "Read the preprint",
+    "images": []
+  },
+  {
+    "id": "2022-esri-arcgis-pro-geoprocessing",
+    "type": "certificate",
+    "title": "Building Geoprocessing Models Using ArcGIS Pro",
+    "date": "2022",
+    "place": "Esri web course",
+    "summary": "",
+    "link": "",
+    "images": []
+  },
+  {
+    "id": "2021-iahr-flow-sediment-vegetation-webinar",
+    "type": "certificate",
+    "title": "Webinar: Research Trends in Flow–Sediment–Vegetation Interactions in Fluvial Systems",
+    "date": "2021",
+    "place": "International Association for Hydro-Environment Engineering and Research (IAHR)",
+    "summary": "",
+    "link": "",
+    "images": []
+  },
+  {
+    "id": "2020-wur-agro-hydrological-modeling-workshop",
+    "type": "certificate",
+    "title": "International workshop on agro-hydrological modeling",
+    "date": "2020",
+    "place": "Wageningen Environmental Research",
+    "summary": "",
+    "link": "",
+    "images": []
+  },
+  {
+    "id": "2019-nasa-arset-water-budgets",
+    "type": "certificate",
+    "title": "NASA ARSET: Using Earth Observations to Monitor Water Budgets for River Basin Management",
+    "date": "2019",
+    "place": "NASA Applied Remote Sensing Training Program (online)",
+    "summary": "",
+    "link": "",
+    "images": []
+  },
+  {
+    "id": "2016-04-espa-summer-school-scholarship",
+    "type": "award",
+    "title": "ESPA Summer-School Scholarship",
+    "date": "2016-04",
+    "place": "Organized by the University of Edinburgh, UK",
+    "summary": "",
+    "link": "",
     "images": []
   },
   {
