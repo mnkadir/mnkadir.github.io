@@ -40,6 +40,7 @@ const TYPES = {
   certificate: 'Training & certificate',
   media: 'Media & interview',
   figure: 'Research figure',
+  fieldwork: 'Fieldwork & lab',
   video: 'Video',
   award: 'Award',
   news: 'News'
@@ -91,40 +92,62 @@ async function loadJson(path) {
 const byNewest = (a, b) => String(b.date || '').localeCompare(String(a.date || ''));
 
 // ---------- Photo viewer ----------
+// `images` is a list of image paths, or of { src, caption, video } objects
+// (video = a YouTube id, played inside the viewer).
 let lightbox;
 function openLightbox(images, title, start = 0) {
   if (!lightbox) {
-    const img = el('img', { alt: '' });
+    const stage = el('div', { class: 'lb-stage' });
     const caption = el('span');
     const prev = el('button', { type: 'button', text: '← Previous' });
     const next = el('button', { type: 'button', text: 'Next →' });
     const close = el('button', { type: 'button', text: 'Close' });
     lightbox = el('dialog', { class: 'lightbox', 'aria-label': 'Photo viewer' },
-      el('figure', {}, img, el('figcaption', {}, caption, el('div', { class: 'lb-buttons' }, prev, next, close))));
+      el('figure', {}, stage, el('figcaption', {}, caption, el('div', { class: 'lb-buttons' }, prev, next, close))));
     document.body.append(lightbox);
     const show = step => {
-      lightbox.index = (lightbox.index + step + lightbox.images.length) % lightbox.images.length;
-      img.src = lightbox.images[lightbox.index];
-      img.alt = lightbox.title;
-      caption.textContent = lightbox.images.length > 1
-        ? `${lightbox.title} (${lightbox.index + 1} of ${lightbox.images.length})` : lightbox.title;
-      prev.hidden = next.hidden = lightbox.images.length < 2;
+      const count = lightbox.items.length;
+      lightbox.index = (lightbox.index + step + count) % count;
+      const item = lightbox.items[lightbox.index];
+      stage.replaceChildren(item.video
+        ? el('iframe', {
+            src: `https://www.youtube-nocookie.com/embed/${item.video}?autoplay=1`, title: item.caption || lightbox.title,
+            allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture', allowfullscreen: ''
+          })
+        : el('img', { src: item.src, alt: item.caption || lightbox.title }));
+      const text = item.caption || lightbox.title;
+      caption.textContent = count > 1 ? `${text} (${lightbox.index + 1} of ${count})` : text;
+      prev.hidden = next.hidden = count < 2;
     };
     lightbox.show_ = show;
     prev.addEventListener('click', () => show(-1));
     next.addEventListener('click', () => show(1));
-    close.addEventListener('click', () => lightbox.close());
-    lightbox.addEventListener('click', event => { if (event.target === lightbox) lightbox.close(); });
+    const hide = () => { stage.replaceChildren(); lightbox.close(); }; // emptying the stage stops any playing video
+    close.addEventListener('click', hide);
+    lightbox.addEventListener('cancel', () => stage.replaceChildren());
+    lightbox.addEventListener('close', () => stage.replaceChildren());
+    lightbox.addEventListener('click', event => { if (event.target === lightbox) hide(); });
     lightbox.addEventListener('keydown', event => {
       if (event.key === 'ArrowLeft') show(-1);
       if (event.key === 'ArrowRight') show(1);
     });
   }
-  lightbox.images = images;
+  lightbox.items = images.map(image => (typeof image === 'string' ? { src: image } : image));
   lightbox.title = title;
   lightbox.index = start;
   lightbox.show_(0);
   lightbox.showModal();
+}
+
+// All pictures of one update, each with its caption. A YouTube video with no
+// photos uses the video's own thumbnail and plays in the viewer.
+function photosOf(item) {
+  const captions = Array.isArray(item.captions) ? item.captions : [];
+  const photos = (item.images || []).map((src, i) => ({ src: safeUrl(src), caption: captions[i] || item.title }))
+    .filter(photo => photo.src);
+  const video = youtubeId(item.link);
+  if (!photos.length && video) photos.push({ src: `https://i.ytimg.com/vi/${video}/hqdefault.jpg`, caption: item.title, video });
+  return photos;
 }
 
 // ---------- CV button ----------
@@ -186,7 +209,7 @@ function updateCard(item, options = {}) {
     },
       el('img', { src: images[0], alt: item.title, loading: 'lazy' }),
       images.length > 1 ? el('span', { class: 'count', text: `${images.length} photos` }) : null);
-    media.addEventListener('click', () => openLightbox(images, item.title));
+    media.addEventListener('click', () => openLightbox(photosOf(item), item.title));
   } else if (video) {
     media = el('button', { class: 'update-media', type: 'button', 'aria-label': `Play video: ${item.title}` },
       el('img', { src: `https://i.ytimg.com/vi/${video}/hqdefault.jpg`, alt: '', loading: 'lazy' }),
@@ -308,21 +331,143 @@ function renderPublications(root, items) {
   draw('all');
 }
 
+// ---------- Gallery ----------
+// Every update that has photos (or a YouTube video) becomes one album tile.
+const GALLERY_GROUPS = [
+  { id: 'figures', label: 'Research figures & posters', types: ['figure'] },
+  { id: 'events', label: 'Conferences & talks', types: ['conference', 'seminar', 'news'] },
+  { id: 'field', label: 'Fieldwork & lab', types: ['fieldwork'] },
+  { id: 'awards', label: 'Certificates & awards', types: ['certificate', 'award'] },
+  { id: 'media', label: 'Media & videos', types: ['media', 'video'] }
+];
+const groupOf = item => GALLERY_GROUPS.find(group => group.types.includes(item.type)) || GALLERY_GROUPS[1];
+
+function galleryTile(item) {
+  const photos = photosOf(item);
+  const group = groupOf(item);
+  const meta = [group.label, formatDate(item.date)].filter(Boolean).join(' · ');
+  const tile = el('button', { class: 'g-tile', type: 'button', 'data-group': group.id,
+    'aria-label': `${photos[0].video ? 'Play video' : `View ${photos.length > 1 ? photos.length + ' photos' : 'photo'}`}: ${item.title}` },
+    el('span', { class: 'g-img' },
+      el('img', { src: photos[0].src, alt: '', loading: 'lazy' }),
+      photos[0].video ? el('span', { class: 'play' }) : null,
+      photos.length > 1 ? el('span', { class: 'count', text: `${photos.length} photos` }) : null),
+    el('span', { class: 'g-caption' }, el('small', { text: meta }), el('strong', { text: item.title })));
+  tile.addEventListener('click', () => openLightbox(photos, item.title));
+  return tile;
+}
+
+function renderGallery(root, items) {
+  const filterBar = root.querySelector('[data-filters]');
+  const wall = root.querySelector('[data-wall]');
+  const albums = items.filter(item => photosOf(item).length);
+  if (!albums.length) {
+    wall.replaceChildren(el('p', { class: 'empty-note', text: 'Photos will appear here soon.' }));
+    return;
+  }
+  const counts = {};
+  albums.forEach(item => { const g = groupOf(item).id; counts[g] = (counts[g] || 0) + 1; });
+  const draw = id => {
+    const shown = id === 'all' ? albums : albums.filter(item => groupOf(item).id === id);
+    wall.replaceChildren(...shown.map(galleryTile));
+    filterBar.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.type === id)));
+  };
+  const button = (id, label, count) => {
+    const b = el('button', { type: 'button', 'data-type': id, 'aria-pressed': 'false' }, label, el('small', { text: String(count) }));
+    b.addEventListener('click', () => { draw(id); history.replaceState(null, '', id === 'all' ? location.pathname : `#${id}`); });
+    return b;
+  };
+  filterBar.replaceChildren(button('all', 'All', albums.length),
+    ...GALLERY_GROUPS.filter(group => counts[group.id]).map(group => button(group.id, group.label, counts[group.id])));
+  const hash = location.hash.slice(1);
+  draw(counts[hash] ? hash : 'all');
+}
+
+// Home page: the newest few gallery tiles.
+function renderGalleryStrip(root, items) {
+  const section = root.closest('section');
+  const albums = items.filter(item => photosOf(item).length).slice(0, Number(root.dataset.limit) || 4);
+  if (!albums.length) { if (section) section.hidden = true; return; }
+  root.replaceChildren(...albums.map(galleryTile));
+  if (section) section.hidden = false;
+}
+
+// ---------- Photo stories on the Research page ----------
+// <div data-project-media="coastal"> shows every photo of updates whose "project" is "coastal".
+function renderProjectStory(root, items) {
+  const id = root.dataset.projectMedia;
+  const mine = items.filter(item => item.project === id)
+    .sort((a, b) => (a.type === 'figure' ? 0 : 1) - (b.type === 'figure' ? 0 : 1));
+  const photos = mine.flatMap(photosOf).filter(photo => !photo.video);
+  if (!photos.length) { root.remove(); return; }
+  const title = root.dataset.title || '';
+  const open = index => openLightbox(photos, title, index);
+  const lead = el('button', { class: 'story-lead', type: 'button', 'aria-label': `Enlarge: ${photos[0].caption}` },
+    el('img', { src: photos[0].src, alt: photos[0].caption, loading: 'lazy' }), el('span', { class: 'zoom-chip', text: 'Click to enlarge' }));
+  lead.addEventListener('click', () => open(0));
+  const rest = photos.slice(1);
+  const visible = rest.slice(0, 4);
+  const thumbs = visible.map((photo, i) => {
+    const extra = i === visible.length - 1 && rest.length > visible.length ? rest.length - visible.length : 0;
+    const thumb = el('button', { class: 'story-thumb', type: 'button', 'aria-label': `Enlarge: ${photo.caption}` },
+      el('img', { src: photo.src, alt: photo.caption, loading: 'lazy' }), extra ? el('span', { text: `+${extra}` }) : null);
+    thumb.addEventListener('click', () => open(i + 1));
+    return thumb;
+  });
+  root.replaceChildren(lead, thumbs.length ? el('div', { class: 'story-thumbs' }, thumbs) : null);
+}
+
+// ---------- Certificates & awards wall ----------
+function renderAchievements(root, items) {
+  const list = items.filter(item => item.type === 'certificate' || item.type === 'award');
+  if (!list.length) { root.closest('section')?.setAttribute('hidden', ''); return; }
+  root.replaceChildren(...list.map(item => {
+    const photos = photosOf(item);
+    const link = safeUrl(item.link) || safeUrl((item.files || [])[0]?.url);
+    const frame = el('span', { class: `a-frame${photos.length ? '' : ' empty'}` },
+      photos.length
+        ? el('img', { src: photos[0].src, alt: '', loading: 'lazy' })
+        : el('span', { class: 'a-seal', 'aria-hidden': 'true' }, el('b', { text: item.type === 'award' ? '★' : '✓' })));
+    const body = el('span', { class: 'a-body' },
+      el('small', { text: [TYPES[item.type], formatDate(item.date)].filter(Boolean).join(' · ') }),
+      el('strong', { text: item.title }),
+      item.place ? el('span', { text: item.place }) : null);
+    let card;
+    if (photos.length) {
+      card = el('button', { class: 'a-card', type: 'button', 'data-type': item.type, 'aria-label': `View certificate: ${item.title}` }, frame, body);
+      card.addEventListener('click', () => openLightbox(photos, item.title));
+    } else if (link) {
+      card = el('a', { class: 'a-card', href: link, target: '_blank', rel: 'noopener', 'data-type': item.type }, frame, body);
+    } else {
+      card = el('div', { class: 'a-card', 'data-type': item.type }, frame, body);
+    }
+    return card;
+  }));
+}
+
 // ---------- Load content ----------
 const highlights = document.querySelector('[data-highlights]');
 const news = document.querySelector('[data-news]');
 const figures = document.querySelector('[data-figures]');
 const videos = document.querySelector('[data-videos]');
-if (highlights || news || figures || videos) {
+const gallery = document.querySelector('[data-gallery]');
+const galleryStrip = document.querySelector('[data-gallery-strip]');
+const stories = document.querySelectorAll('[data-project-media]');
+const achievements = document.querySelector('[data-achievements]');
+if (highlights || news || figures || videos || gallery || galleryStrip || stories.length || achievements) {
   loadJson('data/updates.json').then(items => {
     const list = (Array.isArray(items) ? items : []).filter(item => item && item.title).sort(byNewest);
     if (highlights) renderHighlights(highlights, list);
     if (news) renderNews(news, list);
     if (figures) renderStrip(figures, list.filter(item => item.type === 'figure'), {});
     if (videos) renderStrip(videos, list.filter(item => youtubeId(item.link)), { preferVideo: true });
+    if (gallery) renderGallery(gallery, list);
+    if (galleryStrip) renderGalleryStrip(galleryStrip, list);
+    stories.forEach(root => renderProjectStory(root, list));
+    if (achievements) renderAchievements(achievements, list);
   }).catch(() => {
     const note = el('p', { class: 'empty-note', text: 'Updates could not be loaded. Please refresh the page.' });
-    (highlights?.querySelector('[data-grid]') || news).replaceChildren(note);
+    (highlights?.querySelector('[data-grid]') || gallery?.querySelector('[data-wall]') || news || achievements)?.replaceChildren(note);
   });
 }
 

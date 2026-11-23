@@ -16,7 +16,8 @@ body:
       options:
         - Conference presentation
         - Seminar or talk
-        - Research figure (shown on the home page)
+        - Research figure or poster
+        - Fieldwork or lab photos
         - Video (talk, lecture or recording)
         - Training or certificate
         - Media or interview
@@ -61,4 +62,25 @@ body:
     id: photos
     attributes:
       label: Photos or certificate
-      description: Optional. Click inside this box, then drag and drop your photos or figure image (JPG or PNG) or a PDF certificate. Wait until each upload finishes before you submit. The first photo is the cover.
+      description: Optional. Click inside this box, then drag and drop your photos or figure image (JPG or PNG) or a PDF certificate. Wait until each upload finishes before you submit. The first photo is the cover. All photos of one event become one album in the Gallery.
+  - type: textarea
+    id: captions
+    attributes:
+      label: Photo captions
+      description: Optional. One line per photo, in the same order as the photos above. Leave empty to use the title for every photo.
+      placeholder: |
+        Presenting my poster in the exhibit hall
+        With the MACH team after the session
+  - type: dropdown
+    id: project
+    attributes:
+      label: Show on a research project
+      description: Optional. The photos will also appear beside this project on the Research page.
+      options:
+        - "No"
+        - Estuary bathymetry and flood risk (MACH)
+        - Flow–vegetation interactions (UF Watershed Ecology Lab)
+        - Old Brahmaputra adaptive decision tool
+        - Deltas under Pressure (Wageningen)
+        - GBM delta hydrodynamics, sediment and floods
+        - Water quality, salinity and climate adaptation

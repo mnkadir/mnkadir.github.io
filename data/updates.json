@@ -10,6 +10,32 @@
     "images": []
   },
   {
+    "id": "2026-08-28-philadelphia-high-water-duration-figure",
+    "type": "figure",
+    "title": "Philadelphia’s tide, a century apart",
+    "date": "2026-08-28",
+    "place": "Figure from Kadir et al., 2026 (preprint)",
+    "summary": "Early (1915–1935) versus modern (2000–2020) tide at Philadelphia. With the same tide and sea level, the changed M2 and M4 constituents alone keep water above MHHW for 2.3 h instead of 1.5 h.",
+    "link": "https://doi.org/10.22541/essoar.15008019/v1",
+    "link_label": "Read the preprint",
+    "images": ["assets/featured/delaware-tide-duration-figure.webp"],
+    "captions": ["Philadelphia’s tide, early (1915–1935) versus modern (2000–2020): water stays above MHHW for 2.3 h instead of 1.5 h. Kadir et al., 2026 (preprint)."],
+    "project": "coastal"
+  },
+  {
+    "id": "mach-riverbed-poster",
+    "type": "figure",
+    "title": "Poster: Impact of riverbed changes on estuary water levels",
+    "date": "",
+    "place": "Megalopolitan Coastal Transformation Hub (MACH)",
+    "summary": "",
+    "link": "https://coastalhub.org/mach-focus-areas/coastal-climate-risk/riverbed-delaware-estuary/",
+    "link_label": "MACH project page",
+    "images": ["assets/featured/mach-riverbed-poster.webp"],
+    "captions": ["Research poster: Impact of Riverbed Changes on Estuary Water Levels (MACH)."],
+    "project": "coastal"
+  },
+  {
     "id": "2026-water-institute-symposium",
     "type": "conference",
     "title": "Old Brahmaputra adaptive decision tool in the UF Water Institute Symposium abstracts",
@@ -19,6 +45,19 @@
     "link": "https://conference.ifas.ufl.edu/waterinstitute/documents/WaterInstitute2026-Abstract-Compilation.pdf",
     "link_label": "Abstract compilation (PDF)",
     "images": []
+  },
+  {
+    "id": "2025-12-agu-tidal-overtides-poster",
+    "type": "conference",
+    "title": "First-author poster at the AGU Annual Meeting 2025",
+    "date": "2025-12",
+    "place": "American Geophysical Union Annual Meeting (AGU25), New Orleans, Louisiana",
+    "summary": "“Localized Decline in Tidal Overtides Reveals Anthropogenic Smoothing of the Delaware Estuary”, with Taznin Naher, Jorge Lorenzo-Trueba, Stefan Talke, Thomas Wahl, Sönke Dangendorf and colleagues. A century of deepening, shoreline hardening and marsh loss has weakened the nonlinear tidal overtides, shifting the Delaware Estuary into a different tidal regime.",
+    "link": "https://doi.org/10.22541/essoar.15008019/v1",
+    "link_label": "Read the related preprint",
+    "images": ["assets/updates/2025-12-agu-tidal-overtides-poster-1.jpg"],
+    "captions": ["Presenting my first-author poster on tidal overtides in the Delaware Estuary at AGU25, New Orleans."],
+    "project": "coastal"
   },
   {
     "id": "2025-climate-communicator-certificate",
@@ -51,6 +90,18 @@
     "link_label": "Watch the interview",
     "images": [],
     "source_issue": 2
+  },
+  {
+    "id": "2024-12-agu-enthalpy-poster",
+    "type": "conference",
+    "title": "Poster at the AGU Annual Meeting 2024",
+    "date": "2024-12",
+    "place": "American Geophysical Union Annual Meeting, Washington, D.C.",
+    "summary": "“Enhanced Geomorphic Enthalpy Framework for Modeling Coupled Subaerial and Subaqueous Evolution of Fluvial Deltas under Sea-Level Changes”, with Jorge Lorenzo-Trueba, William Anderson, Viet M. Bui and Vaughan R. Voller.",
+    "link": "",
+    "images": ["assets/updates/2024-12-agu-enthalpy-poster-1.jpg"],
+    "captions": ["Presenting the geomorphic enthalpy poster on fluvial delta evolution at AGU 2024, Washington, D.C."],
+    "project": "coastal"
   },
   {
     "id": "2024-12-agu-oral-presentation",
@@ -125,6 +176,26 @@
     "images": []
   },
   {
+    "id": "2022-citi-rcr-engineers",
+    "type": "certificate",
+    "title": "Responsible Conduct of Research for Engineers",
+    "date": "2022",
+    "place": "CITI Program",
+    "summary": "",
+    "link": "",
+    "images": []
+  },
+  {
+    "id": "2019-prime-minister-fellowship",
+    "type": "award",
+    "title": "Prime Minister Fellowship (2019–2021)",
+    "date": "2019",
+    "place": "Government of Bangladesh",
+    "summary": "",
+    "link": "",
+    "images": []
+  },
+  {
     "id": "2019-nasa-arset-water-budgets",
     "type": "certificate",
     "title": "NASA ARSET: Using Earth Observations to Monitor Water Budgets for River Basin Management",
@@ -140,6 +211,16 @@
     "title": "ESPA Summer-School Scholarship",
     "date": "2016-04",
     "place": "Organized by the University of Edinburgh, UK",
+    "summary": "",
+    "link": "",
+    "images": []
+  },
+  {
+    "id": "2016-nst-fellowship",
+    "type": "award",
+    "title": "National Science & Technology Fellowship (2016–2018)",
+    "date": "2016",
+    "place": "Ministry of Science and Technology, Bangladesh",
     "summary": "",
     "link": "",
     "images": []

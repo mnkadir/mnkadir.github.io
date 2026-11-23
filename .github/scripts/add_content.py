@@ -45,11 +45,21 @@ UPDATE_TYPES = {
     "conference presentation": "conference",
     "seminar or talk": "seminar",
     "research figure (shown on the home page)": "figure",
+    "research figure or poster": "figure",
+    "fieldwork or lab photos": "fieldwork",
     "video (talk, lecture or recording)": "video",
     "training or certificate": "certificate",
     "media or interview": "media",
     "award or recognition": "award",
     "news": "news",
+}
+PROJECTS = {
+    "estuary bathymetry and flood risk (mach)": "coastal",
+    "flow–vegetation interactions (uf watershed ecology lab)": "ecohydraulics",
+    "old brahmaputra adaptive decision tool": "resilience",
+    "deltas under pressure (wageningen)": "deltas",
+    "gbm delta hydrodynamics, sediment and floods": "gbm",
+    "water quality, salinity and climate adaptation": "water-quality",
 }
 PUBLICATION_TYPES = {"Article", "Preprint", "Conference paper", "Poster", "Presentation", "Data"}
 DATE_FORMATS = ("%Y-%m-%d", "%Y/%m/%d", "%m/%d/%Y", "%d %B %Y", "%d %b %Y", "%B %d, %Y", "%b %d, %Y", "%B %d %Y", "%b %d %Y")
@@ -278,14 +288,26 @@ def add_update(form, issue_number):
     }
     if files:
         item["files"] = files
+    captions = [one_line(line, 300) for line in clean_text(form.get("photo captions", ""), 4000).split("\n")]
+    captions = [c for c in captions if c][:len(images)]
+    if captions:
+        item["captions"] = captions
+    project = PROJECTS.get(one_line(form.get("show on a research project", ""), 120).lower())
+    if project:
+        item["project"] = project
     item["source_issue"] = issue_number
     updates.append(item)
     updates.sort(key=lambda u: str(u.get("date", "")), reverse=True)
     save(UPDATES, updates)
     photo_text = f" with {len(images)} photo{'s' if len(images) != 1 else ''}" if images else ""
+    places = [f"- {SITE}/highlights.html#{urllib.parse.quote(item_id)}", f"- {SITE}/ (Recent news)"]
+    if images:
+        places.append(f"- {SITE}/gallery.html (Gallery)")
+    if project:
+        places.append(f"- {SITE}/research.html#{project} (beside the project)")
     return (f"Add update: {title}",
             f"Added **{title}**{photo_text}. It will appear on the website in about two minutes:\n\n"
-            f"- {SITE}/highlights.html#{urllib.parse.quote(item_id)}\n- {SITE}/ (Recent news)")
+            + "\n".join(places))
 
 
 def add_publication(form, issue_number):

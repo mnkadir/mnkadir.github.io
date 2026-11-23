@@ -10,13 +10,17 @@ The website at **https://mnkadir.github.io**. It is a plain static site hosted b
    (or go to the repository → **Issues** → **New issue** → **Add a website update**).
 2. Choose the type, write a title and a date.
 3. Optional: add the event or place, a short description and a link. A YouTube link plays directly on the site.
-4. Optional: click in the **Photos or certificate** box and drag in your photos (JPG or PNG) or a PDF certificate. Wait for each upload to finish. The first photo becomes the cover.
-5. Press **Create**.
+4. Optional: click in the **Photos or certificate** box and drag in your photos (JPG or PNG) or a PDF certificate. Wait for each upload to finish. The first photo becomes the cover. All photos in one form become one album.
+5. Optional: in **Photo captions**, write one line per photo, in the same order.
+6. Optional: in **Show on a research project**, pick a project to also show the photos beside it on the Research page.
+7. Press **Create**.
 
-Two types also appear on the home page:
+Where things appear:
 
-- **Research figure**: attach the figure image and paste the paper link. It shows in **Featured figures** on the home page.
-- **Any item with a YouTube link** (a talk, interview or lecture): it shows and plays in the **Video archive** on the home page.
+- **Gallery page**: every item with photos (or a YouTube link) becomes an album tile, grouped as research figures & posters, conferences & talks, fieldwork & lab, certificates & awards, and media & videos. The newest four also show in **Gallery** on the home page.
+- **Achievements wall** (Gallery and About pages): every *Training or certificate* and *Award or recognition* item, shown as a framed certificate. Attach a photo or scan of the certificate to show the real one.
+- **Research page**: photos of items where you picked a project.
+- **Video archive** on the home page: any item with a YouTube link.
 
 About two minutes later the item is on the **Highlights** page and in **Recent news** on the home page. The form replies with the link and closes itself. If something is wrong (for example a date it cannot read), the reply tells you what to fix.
 
