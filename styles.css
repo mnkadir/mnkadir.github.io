@@ -93,6 +93,7 @@ sub { font-size: .7em; }
 .profile-links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 26px; font-size: 14.5px; font-weight: 600; }
 .profile-links a { color: rgba(255, 255, 255, .7); border-bottom: 1px solid var(--darkline); padding-bottom: 2px; }
 .profile-links a:hover { color: var(--aqua); border-color: var(--aqua); }
+.profile-links .say-hello { color: var(--aqua); border-color: rgba(49, 210, 197, .45); }
 .portrait-wrap { justify-self: end; width: min(100%, 380px); }
 .portrait-frame { position: relative; aspect-ratio: 1; border-radius: 50% 46% 48% 52%; overflow: hidden; border: 1px solid var(--darkline); box-shadow: 0 30px 80px rgba(0, 0, 0, .35); }
 .portrait-frame img { width: 100%; height: 100%; object-fit: cover; }
