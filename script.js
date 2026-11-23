@@ -127,6 +127,41 @@ function openLightbox(images, title, start = 0) {
   lightbox.showModal();
 }
 
+// ---------- CV button ----------
+// Put the CV at assets/cv/Md_Nurul_Kadir_CV.pdf and every "Download CV" button uses it.
+// Until that file exists, the buttons open LinkedIn and say so.
+const CV_PATH = 'assets/cv/Md_Nurul_Kadir_CV.pdf';
+const cvButtons = document.querySelectorAll('[data-cv]');
+if (cvButtons.length) {
+  fetch(CV_PATH, { method: 'HEAD', cache: 'no-cache' }).then(r => r.ok).catch(() => false).then(found => {
+    cvButtons.forEach(a => {
+      if (found) {
+        a.href = CV_PATH;
+        a.setAttribute('download', 'Md_Nurul_Kadir_CV.pdf');
+        a.removeAttribute('target');
+      } else {
+        a.textContent = 'CV on LinkedIn ↗';
+      }
+    });
+  });
+}
+
+// Turns "[words](https://link)" in a description into a clickable link; everything else stays plain text.
+function richText(text) {
+  const parts = [];
+  const pattern = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+  let last = 0;
+  let match;
+  while ((match = pattern.exec(text))) {
+    if (match.index > last) parts.push(document.createTextNode(text.slice(last, match.index)));
+    parts.push(el('a', { href: match[2], target: '_blank', rel: 'noopener', text: match[1].replace(/[,\s]+$/, '') }));
+    if (/[,\s]+$/.test(match[1])) parts.push(document.createTextNode(match[1].match(/[,\s]+$/)[0]));
+    last = pattern.lastIndex;
+  }
+  if (last < text.length) parts.push(document.createTextNode(text.slice(last)));
+  return parts;
+}
+
 // Any element with data-zoom="image path" opens that image in the photo viewer.
 document.querySelectorAll('[data-zoom]').forEach(node => {
   node.addEventListener('click', () => {
@@ -182,7 +217,7 @@ function updateCard(item, options = {}) {
         el('time', { datetime: item.date, text: formatDate(item.date) })),
       el('h3', { text: item.title }),
       item.place ? el('p', { class: 'update-place', text: item.place }) : null,
-      item.summary ? el('p', { class: 'update-summary', text: item.summary }) : null,
+      item.summary ? el('p', { class: 'update-summary' }, richText(item.summary)) : null,
       links.length ? el('div', { class: 'update-links' }, links) : null));
 }
 
